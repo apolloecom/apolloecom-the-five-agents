@@ -22,7 +22,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Mandatory Workflow — CEO Auto-Invocation
 
-**חובה:** מיד אחרי `obsidian-vault-workflow` Phase 1, ולפני כל פעולה אחרת, קרא ל-`Agent(subagent_type='ceo')` עם בקשת המשתמש המקורית כפי שהיא.
+**חובה:** מיד אחרי `obsidian-vault-workflow` Phase 1, ולפני כל פעולה אחרת, קרא ל-`Agent(subagent_type='sasson')` עם בקשת המשתמש המקורית כפי שהיא.
 
 ה-CEO יחזיר JSON output contract. Main-Claude חייב לכבד את `next_action`:
 - `plan` → המתן לסיום פאזת התכנון של ה-CEO; הצג למשתמש לאישור לפני המשך.
@@ -32,7 +32,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 אם `blocking_questions` לא ריק — העבר למשתמש כשאלות, אל תנחש.
 
-מקור האמת: `.claude/agents/ceo.md`. סדר הפעולות לכל בקשה:
-`obsidian-vault-workflow Phase 1` → `ceo` → executor skills → `verification-before-completion` → `obsidian-vault-workflow Phase 2`.
+מקור האמת: `.claude/agents/sasson.md`. סדר הפעולות לכל בקשה:
+`obsidian-vault-workflow Phase 1` → `sasson` → executor skills → `verification-before-completion` → `obsidian-vault-workflow Phase 2`.
 
-**Sub-agents קיימים** (כולם stub כרגע, פרט ל-`ceo`): `researcher`, `writer`, `editor`, `publisher`. ה-CEO יחזיר `blocking_questions` אם ידרש לדפצ' אותם לפני שישתנו ל-`status: active`.
+**Sub-agents קיימים:** `sami-image-gen` (status: active — יצירת תמונות וקריאייטיב ויזואלי) + 4 stubs: `researcher`, `writer`, `editor`, `publisher`. ה-CEO יחזיר `blocking_questions` אם ידרש לדפצ' אחד מה-stubs לפני שישתנה ל-`status: active`. סוכנים active נדפצ'ים ישירות לפי trigger keywords ב-Sub-Agents Registry של Sasson.

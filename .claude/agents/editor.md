@@ -19,7 +19,7 @@ This sub-agent is a placeholder. The CEO orchestrator references it in its dispa
 
 ## Will integrate with
 
-- [[ceo]] orchestrator — מקבל draft + brand guidelines, מחזיר edited version או feedback list.
+- [[sasson]] orchestrator — מקבל draft + brand guidelines, מחזיר edited version או feedback list.
 - Skills צפויים: `obsidian-markdown` (לעריכה במקום), `verification-before-completion` (לוודא שכל הקריטריונים נבדקו).
 - כותב לתוך אותו קובץ של [[writer]] בקטע "Edited v1" או יוצר feedback list לחזרה.
 

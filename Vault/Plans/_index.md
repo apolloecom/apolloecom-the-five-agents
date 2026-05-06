@@ -4,4 +4,4 @@
 
 ## Topics
 
-- none (יתעדכן עם יצירת התוכנית הראשונה ע"י ה-CEO)
+- [[2026-05-06-rename-ceo-to-sasson]] — שינוי ה-identifier הטכני של הסוכן הראשי מ-`ceo` ל-`sasson` בכל הפרויקט (status: shipped).

@@ -19,7 +19,7 @@ This sub-agent is a placeholder. The CEO orchestrator references it in its dispa
 
 ## Will integrate with
 
-- [[ceo]] orchestrator — מקבל brief טרי לכל draft, מחזיר draft + metadata (target audience, channel, length).
+- [[sasson]] orchestrator — מקבל brief טרי לכל draft, מחזיר draft + metadata (target audience, channel, length).
 - Skills צפויים: `frontend-design` (אם הפלט הוא ויז'ואל), `obsidian-markdown` (לעריכה ב-Vault).
 - כותב את ה-draft לתוך `Vault/Content Briefs/<topic>.md` או `Vault/Publishing Log/<topic>.md` בקטע "Draft v1".
 

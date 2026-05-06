@@ -19,7 +19,7 @@ This sub-agent is a placeholder. The CEO orchestrator references it in its dispa
 
 ## Will integrate with
 
-- [[ceo]] orchestrator — מקבל תוכן מאושר + מטא-דאטה (channel, scheduled time), מחזיר אישור פרסום או שגיאה.
+- [[sasson]] orchestrator — מקבל תוכן מאושר + מטא-דאטה (channel, scheduled time), מחזיר אישור פרסום או שגיאה.
 - Skills צפויים: `schedule` (לתזמון), `obsidian-vault-workflow` (לעדכון Publishing Log).
 - MCP servers: יוגדרו לפי הפלטפורמות הנתמכות.
 - כותב לתוך `Vault/Publishing Log/<channel>-<date>.md`.

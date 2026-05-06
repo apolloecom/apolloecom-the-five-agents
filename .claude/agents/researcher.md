@@ -19,7 +19,7 @@ This sub-agent is a placeholder. The CEO orchestrator references it in its dispa
 
 ## Will integrate with
 
-- [[ceo]] orchestrator — מקבל ממנו brief ממוקד, מחזיר ממצאים מובנים.
+- [[sasson]] orchestrator — מקבל ממנו brief ממוקד, מחזיר ממצאים מובנים.
 - Skills צפויים: `deep-research` (אם זמין), `dispatching-parallel-agents` (לחיפוש במקורות מרובים במקביל).
 - כותב את הממצאים לתוך `Vault/Content Briefs/<topic>.md` (בקטע מובנה — Sources / Facts / Trends).
 

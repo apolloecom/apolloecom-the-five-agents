@@ -1,7 +1,7 @@
-# agent-ceo
+# agent-sasson
 
 ## מה הסוכן עושה
-סוכן-המנכ"ל המתזמר של The Five Agents. point of entry לכל בקשת משתמש. מנתח, מסווג, מתכנן (brainstorm → write-plan), מדפצ' לסוכני-בן (subagent-driven או parallel-agents), אוכף checkpoints ב-git, ומפעיל verification-before-completion לפני כל הצהרת done. **לא** מבצע עריכות בעצמו (אין לו `Edit`/`Write` ב-`tools`).
+**Sasson** — סוכן-המנכ"ל המתזמר של The Five Agents. point of entry לכל בקשת משתמש. מנתח, מסווג, מתכנן (brainstorm → write-plan), מדפצ' לסוכני-בן (subagent-driven או parallel-agents), אוכף checkpoints ב-git, ומפעיל verification-before-completion לפני כל הצהרת done. **לא** מבצע עריכות בעצמו (אין לו `Edit`/`Write` ב-`tools`).
 
 ## status
 **active** — הסוכן הראשי הפעיל בפרויקט.
@@ -12,7 +12,7 @@
 - **מנהל:** [[agent-researcher]], [[agent-writer]], [[agent-editor]], [[agent-publisher]].
 
 ## מיקום
-`/.claude/agents/ceo.md`
+`/.claude/agents/sasson.md`
 
 ## מבנה הקובץ
 - Frontmatter: `name`, `description`, `tools` (Read/Grep/Glob/Bash/Agent/TodoWrite/Skill/ExitPlanMode), `model: opus`.

@@ -7,7 +7,7 @@
 **stub** — הקובץ קיים כ-placeholder, ה-CEO לא יידפצ' אותו עד שיתמלא בהגדרת תפקיד מלאה **וגם** עד שיוגדרו MCP integrations לפלטפורמות.
 
 ## למי הוא משויך
-- **תפקיד:** sub-agent של [[agent-ceo]].
+- **תפקיד:** sub-agent של [[agent-sasson]].
 - **מופעל ע"י:** ה-CEO בלבד.
 - **קוראים:** עוד-לא-יישומי.
 
@@ -15,7 +15,7 @@
 `/.claude/agents/publisher.md`
 
 ## קבצים קשורים
-- [[agent-ceo]] — הסוכן הקורא לו.
+- [[agent-sasson]] — הסוכן הקורא לו.
 - [[agent-editor]] — מקור הקלט (תוכן מאושר).
 - [[skill-obsidian-vault-workflow]] — לעדכון Publishing Log.
 - MCP servers (טרם הוגדרו) — אינטגרציות חיצוניות.

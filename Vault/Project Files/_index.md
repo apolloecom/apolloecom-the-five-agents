@@ -7,8 +7,8 @@
 ### Agents
 - [[agent-sasson]] — Sasson, סוכן-מנכ"ל מתזמר, point of entry לכל בקשה (status: active).
 - [[agent-sami-image-gen]] — Sami, סוכן קריאייטיב ויזואלי, יצירת תמונות עם עקביות סגנונית (status: active).
+- [[agent-yael]] — Yael, סוכנת כתיבה (LLM-only), משכתבת מאמרי גלם בסגנון הפרויקט (status: active).
 - [[agent-researcher]] — חקר ומקורות (status: stub).
-- [[agent-writer]] — יצירת draft (status: stub).
 - [[agent-editor]] — עריכה ו-brand voice (status: stub).
 - [[agent-publisher]] — תזמון ופרסום (status: stub).
 

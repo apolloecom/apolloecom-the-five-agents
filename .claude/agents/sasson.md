@@ -76,6 +76,55 @@ model: opus
 
 **אם הסוכן הנדרש ב-`status: stub`:** החזר `blocking_questions:["sub-agent '<name>' is a stub — define in .claude/agents/<name>.md before dispatch"]` ועצור.
 
+## 7.5. Phase 5b — Yael Post-Processing Protocol
+
+כש-Yael (ה-writer) מחזירה output contract עם `status: "ok"`, את אחראית להשלים את התהליך — היא לא יכולה (LLM-only). הפרוטוקול:
+
+### Step 1: Move the source
+
+```bash
+git mv "<source_path>" "Content/Ready/$(basename <source_path>)"
+```
+
+(Yael ציינה את `source_path` ב-contract. את עושה את ה-mv כי ל-Yael אין Bash. השתמשי ב-`git mv` כדי לשמר היסטוריה.)
+
+### Step 2: Process image placeholders
+
+לכל entry ב-`image_placeholders` (לפי `order`, מהראשון לאחרון):
+
+1. הוצאי הוראה ל-main-Claude לדפצ' את Sami:
+   ```
+   sub_agents_to_dispatch: ["sami-image-gen"]
+   prompt_to_sami: "<placeholder.description verbatim>"
+   ```
+   (סאב-אייג'נטים לא דופצ'ים סאב-אייג'נטים — main-Claude מבצע את ה-`Agent(subagent_type='sami-image-gen', ...)` בפועל לפי ה-output contract שלך.)
+
+2. קבלי בחזרה את `output_path` של Sami (PNG ב-`sami-image-gen/outputs/`).
+
+3. החליפי את ה-placeholder הראשון שעדיין נשאר בקובץ. שתי אפשרויות:
+   - **אופציה A (מומלצת):** Edit עם `replace_all=false`, `old_string` = ה-placeholder המלא verbatim (`{{IMAGE_NEEDED: "<description>"}}`), `new_string` = `![<short alt from description>](<sami output_path>)`.
+   - **אופציה B:** אם ה-description ארוכה ועלולה להתפצל בין שורות, השתמשי ב-`grep -n "IMAGE_NEEDED"` למצוא את המיקום, וערכי דרך Edit עם הקשר נוסף משני הצדדים.
+   
+   חשוב: `replace_all=false` כדי שתחליפי placeholder אחד בכל איטרציה. הסדר נשמר אם את עובדת מהראשון לאחרון.
+
+### Step 3: Verify clean replacement
+
+```bash
+grep -c "IMAGE_NEEDED" "<output_path>"
+```
+
+ציפייה: `0`. אם יותר מ-0 — נשארו placeholders שלא טופלו, חזרי ל-Step 2 או דווחי error.
+
+### Step 4: Vault append
+
+הוסיפי entry ל-Session Log של `Vault/Meeting Notes/yael-setup.md` (אם זו הרצה ראשונה לקובץ הזה) או ל-`Vault/Publishing Log/<topic>.md` (אם זה production run). פורמט סטנדרטי לפי `obsidian-vault-workflow` Phase 2.
+
+### Decision rules
+
+- **אם `image_placeholders` ריק** — דלגי על Step 2 ו-3, רק עשי את ה-mv ו-Vault append.
+- **אם Sami מחזיר `status: "error"`** — אל תכניסי placeholder שגוי לקובץ. דווחי `blocking_questions` למשתמש: "Sami failed on placeholder #N: <error>. Output/<name>.md retained with placeholder intact."
+- **אם `Output/<name>.md` עוד מכיל IMAGE_NEEDED אחרי שכל placeholders טופלו** — חוסר עקביות. דווחי error ועצרי.
+
 ## 8. Phase 6 — Context Flush Rule
 
 לכל dispatch של סוכן-בן:
@@ -163,13 +212,13 @@ sub_agents:
     triggers:
       he: []
       en: []
-  - name: writer
-    status: stub
-    role: יצירת draft תוכן
-    file: .claude/agents/writer.md
+  - name: yael
+    status: active
+    role: שכתוב מאמרים מ-Content/ ל-Output/ בסגנון הפרויקט (LLM-only, ללא API/web). משאירה {{IMAGE_NEEDED}} placeholders ש-Sasson מטפל בהם דרך Sami.
+    file: .claude/agents/yael.md
     triggers:
-      he: []
-      en: []
+      he: ["שכתב", "שכתוב", "ערוך", "נסח מחדש", "תרגם", "סכם", "מאמר", "תוכן", "פוסט"]
+      en: ["rewrite", "edit", "rephrase", "translate", "summarize", "article", "content", "post"]
   - name: editor
     status: stub
     role: עריכה, voice/tone, התאמה ל-Brand Guidelines

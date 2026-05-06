@@ -35,4 +35,6 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 מקור האמת: `.claude/agents/sasson.md`. סדר הפעולות לכל בקשה:
 `obsidian-vault-workflow Phase 1` → `sasson` → executor skills → `verification-before-completion` → `obsidian-vault-workflow Phase 2`.
 
-**Sub-agents קיימים:** `sami-image-gen` (status: active — יצירת תמונות וקריאייטיב ויזואלי) + 4 stubs: `researcher`, `writer`, `editor`, `publisher`. ה-CEO יחזיר `blocking_questions` אם ידרש לדפצ' אחד מה-stubs לפני שישתנה ל-`status: active`. סוכנים active נדפצ'ים ישירות לפי trigger keywords ב-Sub-Agents Registry של Sasson.
+**Sub-agents קיימים:** `sami-image-gen` (status: active — יצירת תמונות וקריאייטיב ויזואלי), `yael` (status: active — שכתוב מאמרים בסגנון הפרויקט, LLM-only) + 3 stubs: `researcher`, `editor`, `publisher`. ה-CEO יחזיר `blocking_questions` אם ידרש לדפצ' אחד מה-stubs לפני שישתנה ל-`status: active`. סוכנים active נדפצ'ים ישירות לפי trigger keywords ב-Sub-Agents Registry של Sasson.
+
+**זרימת Yael + Sasson:** Yael מחזירה `image_placeholders[]` ב-output contract. Sasson עושה `git mv` של המקור ל-`Content/Ready/`, ומפעיל את Sami (דרך main-Claude) לכל placeholder, מחליף `{{IMAGE_NEEDED:"..."}}` ב-`![alt](path)`. הפרוטוקול המלא ב-`.claude/agents/sasson.md` סעיף 7.5.

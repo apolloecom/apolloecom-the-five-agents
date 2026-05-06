@@ -4,8 +4,8 @@
 הקמת שכבת ייצור התמונות של הפרויקט ב-2026-05-06: סקיל טכני [[skill-gpt-image-gen]] שעוטף את OpenAI Images API (`gpt-image-2`), וסוכן קריאייטיב [[agent-sami-image-gen]] ("Sami") שאחראי על **עקביות ויזואלית** — סורק `sami-image-gen/reference/`, מחלץ סגנון, ומלחין prompt משולב לפני קריאה לסקיל. ה-active sub-agent הראשון של [[agent-sasson]] (פרט לעצמו). routing אוטומטי דרך trigger keywords (HE/EN) שנוספו ל-Sub-Agents Registry.
 
 ## Open Questions
-- האם `gpt-image-2` קיים ב-OpenAI API? אם API מחזיר `model_not_found` בקריאה הראשונה — fallback מוסכם הוא `gpt-image-1` (עדכון בקובץ הסקיל בלבד).
-- מתי לאסוף reference set ראשון? כרגע התיקייה ריקה — Sami יחזור ל-neutral baseline. ברגע שייכנסו 3-5 תמונות השראה, ה-style brief יתחזק.
+- `gpt-image-2` לא קיים ב-OpenAI API — בקריאה החיה הראשונה נעשה שימוש ב-`gpt-image-1` (fallback עובד כצפוי, תיעוד בסקיל נכון).
+- האם להוסיף trigger keywords נוספים (למשל "תייצר לי", "צריך תמונה", "make me a photo")? נמתין לשימוש בפועל ונרחיב לפי דפוסים שנראה.
 - האם להוסיף trigger keywords נוספים (למשל "תייצר לי", "צריך תמונה", "make me a photo")? נמתין לשימוש בפועל ונרחיב לפי דפוסים שנראה.
 - האם יוצרים MCP integration עתידי בין Sami ל-[[agent-publisher]] כדי שתמונות יזרמו אוטומטית ל-Publishing Log עם metadata?
 
@@ -34,3 +34,17 @@
   - ה-stubs הקודמים (researcher/writer/editor/publisher) לא הופכו ל-active במשימה זו — נשאר scope של Sami בלבד.
   - ה-`triggers` הם רשימה התחלתית קצרה (~6 ב-HE, ~6 ב-EN). יורחבו לפי שימוש בפועל.
 - **Related:** [[agent-sasson]], [[agent-sami-image-gen]], [[skill-gpt-image-gen]], [[root-claude-md]], [[root-env-files]], [[skill-verification-before-completion]], [[skill-writing-plans]]
+
+### 2026-05-06 — First live image generation: user with bull [shipped]
+- **What was done:**
+  - הרצה ראשונה של ה-pipeline כולו: Sasson CEO → general-purpose (as Sami) → gpt-image-gen skill → PNG output.
+  - Sami קרא את תמונת ה-reference (`WhatsApp Image 2025-09-27 at 21.41.29.jpeg`), חילץ מאפייני זהות (גבר ממוצא מזרח-תיכוני, שנות 30 מוקדמות, ראש מגולח, זקן כהה, עור זית, חולצת פשתן חרדלית), וחיבר prompt אנגלי המשלב את הסובייקט עם שור בנוף דרמטי בשעת זהב.
+  - הקובץ `sami-image-gen/outputs/2026-05-06-me-with-bull.png` (1.3 MB, 1024×1024 PNG) נוצר ואומת בהצלחה עם `test -s`.
+  - `.txt` sidecar נשמר לאיטרציה עתידית.
+- **Decisions:**
+  - **`gpt-image-2` → `gpt-image-1` fallback אומת:** ה-API החזיר `model_not_found` ל-`gpt-image-2`; ה-fallback הלך ל-`gpt-image-1` בלי בעיה. סקיל עובד כצפוי — אין שינוי נדרש בקוד, הcaveat מתועד.
+  - **Dispatch path בפועל:** `Agent(subagent_type='sasson')` לא עובד (custom agents לא נחשפים דרך ה-Agent tool של Superpowers). מסלול שעובד: `ceo` built-in → brief extraction → `general-purpose` עם brief מלא של Sami. ייתכן שנרצה לתעד routing pattern זה בצורה יציבה יותר בעתיד.
+- **Notes / Caveats:**
+  - Reference set עדיין קטן (תמונה אחת) — Sami מחלץ סגנון בהצלחה אבל עם יותר תמונות ה-style brief יתחזק.
+  - ה-prompt מבוסס על תיאור מילולי של הסובייקט (לא image-to-image) — ה-API לא מקבל reference images. הפרטים הוחלפו ל-text description, התוצאה אמינה ויזואלית.
+- **Related:** [[agent-sasson]], [[agent-sami-image-gen]], [[skill-gpt-image-gen]], [[skill-verification-before-completion]]
